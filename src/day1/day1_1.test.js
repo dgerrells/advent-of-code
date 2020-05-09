@@ -1,5 +1,13 @@
 import test from 'ava';
-import { calcDist, calcDistFunc, inputDelimiter } from './day1_1.js';
+import { calcDist, calcDistFunc, inputDelimiter, traverse } from './day1_1.js';
+
+test('traverse should be pure', (t) => {
+  const expectDist = 7;
+  const steps = ['R100', 'L2', 'L99', 'L8'];
+  const result = traverse(steps, 0, 0, 'N');
+  t.true(steps.length === 4, 'should not have changed input step array');
+  t.deepEqual(result, expectDist);
+});
 
 test('check exmaple input 5 blocks away', (t) => {
   const input = 'R2, L3';

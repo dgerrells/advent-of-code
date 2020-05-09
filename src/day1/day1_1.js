@@ -87,7 +87,7 @@ const buildStepArray = (input) => {
  * @param {Number} y
  * @param {String} dir
  */
-const traverse = (steps, x, y, dir) => {
+export const traverse = (steps, x, y, dir) => {
   if (steps.length === 0) {
     return Math.abs(x) + Math.abs(y);
   }

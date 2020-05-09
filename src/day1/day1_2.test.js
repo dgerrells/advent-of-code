@@ -2,15 +2,10 @@ import test from 'ava';
 import { fillX, fillY, calcDup, calcDupFunc, traverse } from './day1_2.js';
 
 test('traverse should be pure', (t) => {
-  const expectDist = 7;
-  const takenSteps = [];
-  const steps = ['R100', 'L2', 'L99', 'L8'];
-  const result = traverse(steps, 0, 0, 'N', takenSteps);
+  const expectDist = 5;
+  const steps = ['R10', 'L1', 'L5', 'L100'];
+  const result = traverse(steps, 0, 0, 'N');
   t.true(steps.length === 4, 'should not have changed input step array');
-  t.true(
-    takenSteps.length === 0,
-    'should not have changed input taken step array'
-  );
   t.deepEqual(result, expectDist);
 });
 
@@ -24,6 +19,12 @@ test('check exmaple input 2 blocks away no duplicate functional', (t) => {
   const input = 'R2, R2, R2';
   const expectDist = 2;
   t.true(calcDup(input) === expectDist);
+});
+
+test('check duplicate big input at start func', (t) => {
+  const input = 'R8, '.repeat(10000) + 'R8';
+  const expectDist = 0;
+  t.deepEqual(calcDupFunc(input), expectDist);
 });
 
 test('check duplicate repeat at start func', (t) => {

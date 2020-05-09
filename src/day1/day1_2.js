@@ -109,7 +109,7 @@ const buildStepArray = (input) => {
  * @param {String} dir
  * @param {Array} takenSteps
  */
-export const traverse = (steps, x, y, dir, takenSteps = []) => {
+export const traverse = (steps, x, y, dir, takenSteps = [new Vec2()]) => {
   if (steps.length === 0) {
     return Math.abs(x) + Math.abs(y);
   }
@@ -152,10 +152,10 @@ const getDupStep = (stepPos, takenSteps) => {
 const getIntersection = (startP1, endP1, startP2, endP2) => {
   const isP1Vertical = startP1.y === endP1.y;
   const isP2Vertical = startP2.y === endP2.y;
-  if (isP1Vertical && isP2Vertical) {
-    if (startP1.x !== startP2.x) {
-      return false;
-    }
+  if (isP1Vertical && isP2Vertical && startP1.x !== startP2.x) {
+    return false;
+  } else if (!isP1Vertical && !isP2Vertical && startP1.y !== startP2.Y) {
+    return false;
   }
 
   //fill set with step coords from start to end p1
