@@ -1,0 +1,17 @@
+{
+  "name": "advent-of-code",
+  "version": "1.0.0",
+  "description": "David Gerrell's advent of code! ",
+  "main": "index.js",
+  "scripts": {
+    "start": "node ./src/index.js",
+    "test": "ava",
+    "watch:test": "ava --watch"
+  },
+  "author": "David G",
+  "license": "ISC",
+  "type": "module",
+  "devDependencies": {
+    "ava": "^3.8.2"
+  }
+}
