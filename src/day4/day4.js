@@ -1,7 +1,7 @@
 import { promises as fs } from 'fs';
 import path from 'path';
 import { sumValidSectorsNums } from './day4_1.js';
-
+import { findHiddenSectorNumber } from './day4_2.js';
 /**
  * This just loads a file and catches an error. We read it all into memory. No streaming here, yet.
  * If there was an error, null is returned.
@@ -21,5 +21,10 @@ export const startDay4 = async () => {
   const defaultFile = 'src/day4/input.txt';
   const inputString = await readInput(defaultFile);
   console.log(`Answer for day 4 part 1: ${sumValidSectorsNums(inputString)}`);
-  // console.log(`Answer for day 4 part 2: ${calcDupFunc(inputString)}`);
+  console.log(
+    `Answer for day 4 part 2: ${findHiddenSectorNumber(
+      inputString,
+      'northpole'
+    )}`
+  );
 };

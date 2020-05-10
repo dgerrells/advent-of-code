@@ -30,7 +30,9 @@ Found some errors in parsing regex and cleaned them up. We now will only parse c
 
 Again, update test cases.
 
-I come back from trying out the solution and well the approach above wasn't working very well. I didn't take into account a character not in the checksum that had a higher count. So I went back to the drawing board and make it stupid simple. This time, we are going to create the correct checksum from the name instead of the other way.
+### Oh boi!
+
+I come back from trying out the solution and well the approach above wasn't working very well at all. I didn't take into account a character not in the checksum that had a higher count. So I went back to the drawing board and make it stupid simple. This time, we are going to create the correct checksum from the name instead of the other way.
 
 1. create map of counts for all characters in the name (S (26) or S(u) where u is number of unique characters in input)
 2. sort the keys of the map by value in map and then by character O(n log n)
@@ -38,3 +40,31 @@ I come back from trying out the solution and well the approach above wasn't work
 4. Compare correct checksum with given checksum.
 
 This got me the right answer and part 2. I am not happy with the test coverage and I want to dig into a way of creating test data after reading part two but I don't have as much time. Instead I will add what tests I can and move on to part 2.
+
+## Part 2 First go
+
+So part two took some time for me to understand what I needed to do. I got what the steps are for rotating the characters based on the number but had no idea what in the world I was suppose to compare the rotated name to. I ended up just guessing that it was 'north pole' or something. D:
+
+First thing is to split up the filtering in first solution to give me a list of valid sector infos. Refactored and old tests still worked. Woot!
+
+Nice, now with that the idea is to pipe this into a function for part two that will rotate each char based on sector number. I think I can use some module 26 or something to rotate. Once that is done, I am going to see if it has our magic word 'north pole'.
+
+Right, lets get to it.
+
+### Not too hard
+
+Ok so I did have to look up how to turn a javascript string to char code. We end up having to `-97` to get it in the range of a-z which means to convert back we add `+97`.
+
+Steps:
+
+1. Get char code
+2. convert to a-z range by - 97
+3. add sector number
+4. mod 26 to get rotated char
+5. add 97 back
+6. convert to char
+7. Profit
+
+Many steps but this ended up just being `String.fromCharCode((({letter}.charCodeAt(0) - 97 + {sector number}) % 26) + 97)`. I found that this gave the right solution but I am missing some test coverage. I do like the simplicity of this function but there could be an improvement by using a for loop and exiting early but this doesn't use for loops which is fun.
+
+Ok, commit and than off to write some tests.

@@ -1,4 +1,4 @@
-const PARSE_DATA = /^(?<data>(?:[a-zA-Z]+-)+)(?<sector>[0-9]+)\[(?<checksum>(?<=\[)[a-zA-Z]{5}(?=\]))/gm; // /(?<data>[a-zA-Z0-9-]+)(?<sector>(?<=-)[0-9]+)\[(?<checksum>(?<=\[)[a-zA-Z]{5}(?=\]))/g;
+const PARSE_DATA = /^(?<data>(?:[a-zA-Z]+-)+)(?<sector>[0-9]+)\[(?<checksum>(?<=\[)[a-zA-Z]{5}(?=\]))/gm;
 const INVALID_NAME_CHARS = /[^a-zA-Z]*/g;
 
 export const getSectorData = (inputStr) => {
@@ -36,10 +36,11 @@ const getChecksum = (info) => {
     .join('');
 };
 
+export const getValidSectors = (inputStr) =>
+  getSectorData(inputStr).filter((info) => getChecksum(info) === info.checksum);
+
 export const sumValidSectorsNums = (inputStr) => {
-  return getSectorData(inputStr)
-    .map((info) =>
-      getChecksum(info) !== info.checksum ? 0 : Number.parseInt(info.sector)
-    )
+  return getValidSectors(inputStr)
+    .map((info) => Number.parseInt(info.sector))
     .reduce((sectorSum, sector) => sectorSum + sector, 0);
 };
