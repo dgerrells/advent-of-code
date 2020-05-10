@@ -37,17 +37,14 @@ test('should return empty with unmatched input sector data', (t) => {
     'I am the bad string :( no sector gere',
     'i-am-still-bad[cause]',
     '3213-123-3-23[12345]',
+    'asd[abcd4]',
+    '--still-123[cause]',
+    '321-df-34-1234[rtete]',
+    'aaaaa-bbb-z-y-x--123[abxyz]',
+    'aaa1aa-bbb-z-y-x-123[abxyz]',
+    'aaa$aa-bbb-z-y-x-123[abxyz]',
   ];
 
   const dataArray = getSectorData(sectorData.join('\n'));
-  t.true(dataArray.length === 0, 'should have no matches');
-});
-
-test('should remove any numbers in encrypted name', (t) => {
-  // there is the case where numbers or characters are added to
-  const sectorData = ['321-df-34-1234[rtete]'];
-
-  const dataArray = getSectorData(sectorData.join('\n'));
-  t.true(dataArray.length === 1, 'should have one match');
-  t.deepEqual(dataArray[0].data, 'df');
+  t.deepEqual(dataArray.length, 0, 'should have no matches');
 });

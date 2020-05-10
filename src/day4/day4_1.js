@@ -1,4 +1,4 @@
-const PARSE_DATA = /(?<data>[a-zA-Z0-9-]+)(?<sector>(?<=-)[0-9]+)\[(?<checksum>(?<=\[)[a-zA-Z]{5}(?=\]))/g;
+const PARSE_DATA = /^(?<data>(?:[a-zA-Z]+-)+)(?<sector>[0-9]+)\[(?<checksum>(?<=\[)[a-zA-Z]{5}(?=\]))/gm; // /(?<data>[a-zA-Z0-9-]+)(?<sector>(?<=-)[0-9]+)\[(?<checksum>(?<=\[)[a-zA-Z]{5}(?=\]))/g;
 const INVALID_NAME_CHARS = /[^a-zA-Z]*/g;
 
 export const getSectorData = (inputStr) => {

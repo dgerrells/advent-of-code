@@ -19,3 +19,13 @@ As I thought about this more I think I could maybe do the whole thing with one r
 I may come back to this after the earlier approach is done.
 
 ## Part 1 First implementation
+
+I am starting out with parsing the data with a regex. I figured this would be fun. I ended up spending a bit of time putting together a regex that can parse an entire file into an array ob objects containing the named capture groups.
+
+Only step not done in the regex is removing any non-character digit in the encrypted name such as '-'. We could detect the case where there is something other than '-' like '3' and throw the input out. I like keeping it as this way down the road we could add support for numbers or other characters in the encrypted name.
+
+Add some tests. Ok, looking good and commit.
+
+Found some errors in parsing regex and cleaned them up. We now will only parse correct valid input and only need to replace the dashes from our data capture group. So, we have three capture groups `data`, `sector`, and `checksum`. If any of those does not have the correct format, we throw the line out. Nice!
+
+Again, update test cases.
