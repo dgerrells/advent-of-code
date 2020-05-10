@@ -29,3 +29,12 @@ Add some tests. Ok, looking good and commit.
 Found some errors in parsing regex and cleaned them up. We now will only parse correct valid input and only need to replace the dashes from our data capture group. So, we have three capture groups `data`, `sector`, and `checksum`. If any of those does not have the correct format, we throw the line out. Nice!
 
 Again, update test cases.
+
+I come back from trying out the solution and well the approach above wasn't working very well. I didn't take into account a character not in the checksum that had a higher count. So I went back to the drawing board and make it stupid simple. This time, we are going to create the correct checksum from the name instead of the other way.
+
+1. create map of counts for all characters in the name (S (26) or S(u) where u is number of unique characters in input)
+2. sort the keys of the map by value in map and then by character O(n log n)
+3. join first 5 entries in list
+4. Compare correct checksum with given checksum.
+
+This got me the right answer and part 2. I am not happy with the test coverage and I want to dig into a way of creating test data after reading part two but I don't have as much time. Instead I will add what tests I can and move on to part 2.

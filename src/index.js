@@ -1,5 +1,6 @@
 import readline from 'readline';
 import { startDay1 } from './day1/day1.js';
+import { startDay4 } from './day4/day4.js';
 
 const validProblems = new Set(['1', '4', '10']);
 
@@ -35,6 +36,8 @@ const startAdvent = async () => {
 
   if (probNum === '1') {
     await startDay1();
+  } else if (probNum === '4') {
+    await startDay4();
   }
 
   rl.close();

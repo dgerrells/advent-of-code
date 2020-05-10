@@ -1,5 +1,34 @@
 import test from 'ava';
-import { getSectorData } from './day4_1.js';
+import { getSectorData, sumValidSectorsNums } from './day4_1.js';
+
+test('should not sum single sector with missing count char in checksum', (t) => {
+  const sectorData = 'a-b-c-dhhh-e-f-g-hhhh-987[abcde]';
+  const validSector = sumValidSectorsNums(sectorData);
+  t.deepEqual(validSector, 0);
+});
+
+test('should sum valid single sector with ties', (t) => {
+  const sectorData = 'a-b-c-d-e-f-g-h-987[abcde]';
+  const validSector = sumValidSectorsNums(sectorData);
+  t.deepEqual(validSector, 987);
+});
+
+test('should sum valid single sector', (t) => {
+  const sectorData = 'not-a-real-room-404[oarel]';
+  const validSector = sumValidSectorsNums(sectorData);
+  t.deepEqual(validSector, 404);
+});
+
+test('should sum only valid sectors', (t) => {
+  const sectorDataArray = [
+    'abcde-116[abcde]',
+    'aaaaaaaaaa-bbbbb-ccccccccc-ddd-ee-q-973[acbde]',
+    'wbhsfbohwcboz-foppwh-qighcasf-gbbbbbsfjwqs-480[fhswb]',
+    'i-is-bad-sector-qs-480[fhswb]',
+  ];
+  const validSectorNumber = sumValidSectorsNums(sectorDataArray.join('\n'));
+  t.deepEqual(validSectorNumber, 116 + 973);
+});
 
 test('should parse sector data from string', (t) => {
   const expectedData = {
