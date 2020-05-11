@@ -1,7 +1,7 @@
 import { getValidSectors } from './day4_1.js';
 
-export const findHiddenSectorNumber = (inputStr, toFind) => {
-  return getValidSectors(inputStr).filter((info) =>
+const findHiddenSectorInfo = (inputStr, toFind) =>
+  getValidSectors(inputStr).filter((info) =>
     info.data
       .split('')
       .map((char) =>
@@ -11,5 +11,9 @@ export const findHiddenSectorNumber = (inputStr, toFind) => {
       )
       .join('')
       .includes(toFind)
-  )[0].sector;
+  )[0];
+
+export const findHiddenSectorNumber = (inputStr, toFind) => {
+  const info = findHiddenSectorInfo(inputStr, toFind);
+  return info ? info.sector : false;
 };

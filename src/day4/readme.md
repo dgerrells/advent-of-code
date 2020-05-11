@@ -68,3 +68,9 @@ Steps:
 Many steps but this ended up just being `String.fromCharCode((({letter}.charCodeAt(0) - 97 + {sector number}) % 26) + 97)`. I found that this gave the right solution but I am missing some test coverage. I do like the simplicity of this function but there could be an improvement by using a for loop and exiting early but this doesn't use for loops which is fun.
 
 Ok, commit and than off to write some tests.
+
+Wrote a few tests and then looked into generative testing...oh boi it is interesting. I want to use [ava-check](https://github.com/leebyron/testcheck-js/tree/master/integrations/ava-check) a plugin for the test runner we use that gives us acess to [testcheck](https://github.com/leebyron/testcheck-js) which is a dope generative testing framework.
+
+See, the first part of this problem is kinda like a sort so one of the properties we could test is that processing the encrypted name twice should be the same as processing it once. Same with the checksum. We could also have a property where if a number > 0 is returned, it should be the same as the sector number as the only time we don't get 0 is if the sector number is valid.
+
+There are other ideas I have but due to time constrains I am going to move on and maybe come back to this.
