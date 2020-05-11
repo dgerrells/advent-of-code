@@ -39,7 +39,11 @@ const startAdvent = async () => {
     );
 
     if (probMap[probNum]) {
-      await probMap[probNum]();
+      try {
+        await probMap[probNum]();
+      } catch (e) {
+        console.log('Oh no! There was an error :( ', ` "${e}" `);
+      }
     }
 
     const shouldKeepGoing = await awaitValidInput(
