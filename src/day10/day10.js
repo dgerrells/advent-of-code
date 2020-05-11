@@ -16,7 +16,7 @@ export const readInput = async (file) => {
   }
 };
 
-export const startDay1 = async () => {
+export const startDay10 = async () => {
   const defaultFile = 'src/day10/input.txt';
   const inputString = await readInput(defaultFile);
   console.log(
