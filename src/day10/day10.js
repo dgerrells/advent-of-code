@@ -19,8 +19,25 @@ export const readInput = async (file) => {
 export const startDay10 = async () => {
   const defaultFile = 'src/day10/input.txt';
   const inputString = await readInput(defaultFile);
-  console.log(
-    `Answer for day 10 part 1: ${processBotInstructions(inputString)}`
-  );
+  processBotInstructions(inputString, (bot, low, high) => {
+    // console.log(bot, low, high);
+    if (low === 17 && high === 61) {
+      console.log(`Answer for day 10 part 1: ${bot}`);
+    }
+  });
   // console.log(`Answer for day 1 part 2: ${calcDupFunc(inputString)}`);
 };
+
+// bot 0 []
+//   low -> bot 1
+//   high -> bot 2
+// bot 1 []
+//   low -> out 0
+//   high -> output 3
+// bot 2 []
+//   low -> out 2
+//   high -> out 3
+// out 0 [5]
+// out 1 [61]
+// out 2 [17]
+// out 3 [61]

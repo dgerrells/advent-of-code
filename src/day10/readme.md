@@ -101,3 +101,22 @@ I can see some generative testing potential here which we may revisit later.
 ## Implementation
 
 I got to implementing everything and so far so good. First little test is being passed without the lambda part. I have not put in running an optional lambda yet but am going to commit with the first set of tests passing.
+
+Now, the lazy way of giving predicate support for this is to bring my helper functions into the scope of the caller which will have the optional predicate we can run. This just saves me one arg to keep track of during the run. I am going to try and keep it a bit cleaner by just passing the predicate as a func.
+
+One thing to note is that I am going to remove the need to terminate when our predicate returns true. Sure this would speed things up but I'd rather have the option of having many predicates we could run on dif steps.
+
+## A Bad Assumption
+
+So I had an incorrect assumption on how this worked. I thought that we did not need to process all value inputs first before we can start following the graph...turns out, we did. What this meant is that my fun little recursive add value is nuked. I looked over what I had and found that I basically could reuse most of my work and instead add a part to reduce a list of bots that have 2 values. We terminate when this is reduced to an empty array.
+
+1. Build graph structure from commands
+2. Store value get commands
+3. while there are bots with more than 2 chips
+   1. send low to low edge and high to high edge
+   2. run predicate (optional)
+4. Done
+
+I refactored and did this and it worked. Well my single test case passed. I try again having previously failed for submitting my solution and I see the little gold star. Awesome! As I look at this I can tell there are improvements that can be done and I do not like the test coverage I ended up with. My solution doesn't have a define correct function for inputs that have odd structures like adding 100 values to one bot. I am ok with this for now.
+
+Clean up some code and commit. Off to part 2.

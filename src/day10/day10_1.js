@@ -1,17 +1,39 @@
-export const processBotInstructions = (str) => {
+export const processBotInstructions = (str, predicate) => {
   const graphData = {};
-  const commands = str
+  const botKeys = [];
+  str
     .split('\n')
     .filter((line) => {
       if (line.startsWith('value')) {
         return true;
       }
-      addBotCommand(line, graphData);
+      processBotCommand(line, graphData, botKeys);
       return false;
     })
     .map((line) => {
       processValLine(line, graphData);
     });
+
+  let toTraverse = [...botKeys].filter(
+    (key) => (graphData[key] || []).length === 2
+  );
+  while (toTraverse.length > 0) {
+    toTraverse.forEach((key) => {
+      const botData = graphData[key];
+      const lowVal = Math.min(...botData);
+      const highVal = Math.max(...botData);
+      predicate(key, lowVal, highVal, graphData);
+      const lowEdge = graphData[key + 'low'];
+      const highEdge = graphData[key + 'high'];
+      graphData[lowEdge] = [...(graphData[lowEdge] || []), lowVal];
+      graphData[highEdge] = [...(graphData[highEdge] || []), highVal];
+      graphData[key] = [];
+    });
+
+    toTraverse = [...botKeys].filter(
+      (key) => (graphData[key] || []).length > 1
+    );
+  }
 
   return graphData;
 };
@@ -25,46 +47,12 @@ const processValLine = (line, graph) => {
   if (!input) {
     throw `Failed to parse value input for line: ${line}`;
   }
-
-  addValueToGraph(input.bot, Number.parseInt(input.value), graph);
-};
-
-const addValueToGraph = (edge, value, graph) => {
-  graph[edge] = [...(graph[edge] || []), value];
-
-  if (edge.includes('output')) {
-    // we terminate at an output
-    return;
-  }
-
-  const botData = graph[edge];
-  if (botData.length > 2) {
-    throw `Bot ${edge} found with more than 2 values: ${botData}`;
-  }
-  if (botData.length === 1) {
-    return; // still ok
-  }
-
-  // ok more than two, time to start the fan
-  const lowVal = Math.min(...botData);
-  const lowEdge = graph[edge + 'low'];
-  if (!lowEdge) {
-    throw `Bot ${edge} did not have low edge in graph.`;
-  }
-  addValueToGraph(lowEdge, lowVal, graph);
-
-  const highVal = Math.max(...botData);
-  const highEdge = graph[edge + 'high'];
-  if (!highEdge) {
-    throw `Bot ${edge} did not have high edge in graph`;
-  }
-  addValueToGraph(highEdge, highVal, graph);
-
-  graph[edge] = []; // we are done
+  const edge = input.bot;
+  graph[edge] = [...(graph[edge] || []), input.value];
 };
 
 const BOT_COMMAND_REGEX = /(?<bot>bot [0-9]+)(?: gives low to )(?<low>(bot|output) [0-9]+)(?: and high to )(?<high>(bot|output) [0-9]+)/g;
-const addBotCommand = (line, graph) => {
+const processBotCommand = (line, graph, botArray) => {
   const data = [...line.matchAll(BOT_COMMAND_REGEX)].map((match) => ({
     ...match.groups,
   }))[0];
@@ -76,4 +64,5 @@ const addBotCommand = (line, graph) => {
   }
   graph[data.bot + 'low'] = data.low;
   graph[data.bot + 'high'] = data.high;
+  botArray.push(data.bot);
 };
