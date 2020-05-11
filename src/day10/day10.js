@@ -21,7 +21,6 @@ export const startDay10 = async () => {
   const defaultFile = 'src/day10/input.txt';
   const inputString = await readInput(defaultFile);
   processBotInstructions(inputString, (bot, low, high) => {
-    // console.log(bot, low, high);
     if (low === 17 && high === 61) {
       console.log(`Answer for day 10 part 1: ${bot}`);
     }
