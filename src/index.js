@@ -71,7 +71,7 @@ const awaitValidInput = async (
   let answer = await syncPromp(prompt, rl);
   while (true) {
     if (validInput.includes(answer.toLowerCase())) {
-      return answer;
+      return answer.toLowerCase();
     }
     console.log(badInputMsg);
     answer = await syncPromp(prompt, rl);
