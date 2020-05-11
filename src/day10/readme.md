@@ -13,6 +13,8 @@ Ok, I think if we assume the above, than this starts to look like a nice graph p
 
 Now we are adding the assumption that there will not be a cycle in the graph for now.
 
+## Example
+
 Example data before processing the last value to bot 2.
 
 ```javascript
@@ -84,6 +86,8 @@ const edges: {
 
 Awesome! We can split up this into say a bot map and an output map or something similar.
 
+## Now what?
+
 Ok, now how will we know which bot compares a given value? We can have an optional lambda that we run before each bot compares two values. If it returns true, we stop processing, otherwise we continue. This will let us pass a function to check when and if a bot ever compares two specific values. Cool, that should give us that part.
 
 I still am unsure of some things. For example, could we process everything other than the adding the values to build our graph, than we can add the values until we have none left. I think this should work.
@@ -93,3 +97,7 @@ Another note is that we can create the nodes as needed when we are processing. T
 Ok, lets try this idea out. First write a basic unit test :D
 
 I can see some generative testing potential here which we may revisit later.
+
+## Implementation
+
+I got to implementing everything and so far so good. First little test is being passed without the lambda part. I have not put in running an optional lambda yet but am going to commit with the first set of tests passing.

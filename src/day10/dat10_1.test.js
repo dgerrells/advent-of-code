@@ -11,11 +11,11 @@ import { processBotInstructions } from './day10_1.js';
  */
 
 test('should return correct example input end state', (t) => {
+  let botThatCompared5and2 = false;
   const predicate = (bot, highVal, lowVal, graphState) => {
     if (highVal === 5 && lowVal === 2) {
-      t.deepEqual(bot, 'bot 2', 'bot two should compare 5 and 2');
+      botThatCompared5and2 = bot;
     }
-    return true; // just keep going for now
   };
   const botInput = [
     'value 5 goes to bot 2',
@@ -30,4 +30,9 @@ test('should return correct example input end state', (t) => {
   t.deepEqual(graphData['output 1'], [2]);
   t.deepEqual(graphData['output 0'], [5]);
   t.deepEqual(graphData['output 2'], [3]);
+  t.deepEqual(
+    botThatCompared5and2,
+    'bot 2',
+    'should have called predicate with bot 2 for compare'
+  );
 });
