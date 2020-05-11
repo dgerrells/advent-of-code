@@ -106,7 +106,7 @@ Now, the lazy way of giving predicate support for this is to bring my helper fun
 
 One thing to note is that I am going to remove the need to terminate when our predicate returns true. Sure this would speed things up but I'd rather have the option of having many predicates we could run on dif steps.
 
-## A Bad Assumption
+### A Bad Assumption
 
 So I had an incorrect assumption on how this worked. I thought that we did not need to process all value inputs first before we can start following the graph...turns out, we did. What this meant is that my fun little recursive add value is nuked. I looked over what I had and found that I basically could reuse most of my work and instead add a part to reduce a list of bots that have 2 values. We terminate when this is reduced to an empty array.
 
@@ -120,3 +120,27 @@ So I had an incorrect assumption on how this worked. I thought that we did not n
 I refactored and did this and it worked. Well my single test case passed. I try again having previously failed for submitting my solution and I see the little gold star. Awesome! As I look at this I can tell there are improvements that can be done and I do not like the test coverage I ended up with. My solution doesn't have a define correct function for inputs that have odd structures like adding 100 values to one bot. I am ok with this for now.
 
 Clean up some code and commit. Off to part 2.
+
+## Part 2
+
+Ok this one is a give me. We just look at the graph data outputs and return that. I could just reuse the same func but I wrote a small wrapper that just returns the outputs as a map.
+
+Wrote an example tests against this and it worked. Checked my answer with input and it passed. Another star! Yes! Winnnniiiing
+
+For real though, I went back to looking at writing some better tests for this. I came up with an idea but I will have to come back to it. I added my idea as a comment in the test file.
+
+I noticed that my main file does not have any error handling so I updated that.
+
+I am kinda ok right now but will sleep on it and come back later.
+
+Commit :)
+
+## Final Thoughts
+
+Ok, I again had an issue with a bad assumption on how the problem worked which again made me have to rework but rework and not restart completely. Also, after I wrote down my assumptions and idea first, I implemented it much quicker and without issues. I did get the incorrect solution working without error and kinda correct fast. Now, I did have to go back and redo some work which took time and digging into the problem more but this I think is a marked improvement over the previous day.
+
+My next idea is to double down. I want to not only well layout my assumptions and idea but before I implement them, validate that certain edge cases are handled.
+
+Also, generative testing sounds like a really fun way of maybe trying edge cases. I think it would have given been better to start with writing some test cases built with a generative testing lib well before thinking about the solution even! This will make sure I have a strong understanding of the domain and how things are working before I try to solve anything.
+
+Awesome. Hopefully, I can apply some of this in the future. Maybe I can come back and revisit some of the testing here.
