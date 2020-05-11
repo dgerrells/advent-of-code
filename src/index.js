@@ -35,7 +35,7 @@ const startAdvent = async () => {
       ).join()}) to run: `,
       Object.keys(probMap),
       rl,
-      'Opps, that is not a valid problem number.'
+      'Oops, that is not a valid problem number.'
     );
 
     if (probMap[probNum]) {
