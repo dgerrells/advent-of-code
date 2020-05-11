@@ -1,4 +1,4 @@
-export const processBotInstructions = (str, predicate) => {
+export const processBotInstructions = (str, predicate = () => {}) => {
   const graphData = {};
   const botKeys = [];
   str

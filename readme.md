@@ -49,4 +49,4 @@ There will also be a readme describing the thought process I had for each proble
 
 The application simply wait for input to pick a problem to simulate. The problem will return the result based on the input for my account.
 
-You can change the input files and rerun to process other input.
+You can change the input files and rerun to process other input. You do not need to restart the app to do this.

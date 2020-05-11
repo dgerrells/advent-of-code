@@ -74,3 +74,9 @@ Wrote a few tests and then looked into generative testing...oh boi it is interes
 See, the first part of this problem is kinda like a sort so one of the properties we could test is that processing the encrypted name twice should be the same as processing it once. Same with the checksum. We could also have a property where if a number > 0 is returned, it should be the same as the sector number as the only time we don't get 0 is if the sector number is valid.
 
 There are other ideas I have but due to time constrains I am going to move on and maybe come back to this.
+
+## Final thoughts
+
+So this one was fun. I liked how I thought of this real great idea and it was totally wrong. This just goes to show that I really need to pay more attention to my assumptions. I want to figure out a better strategy with these. Next time I want to write down in more detail my assumptions and ideas before I dig into actually writing any code/pseudo code.
+
+I say this after having finished day 10 doing the above. It did work better. See `Final thoughts` for day 10 for details.
